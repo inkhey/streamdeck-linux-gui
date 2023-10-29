@@ -70,7 +70,8 @@ class ImageFilter(Filter):
         self.frames = []
         for frame, milliseconds, hashcode in zip(frames, frame_duration, frame_hash):
             frame = frame.copy()
-            if frame.mode == "P":
+            # convert all frame to RGBA to avoid weird result
+            if frame.mode != "RGBA":
                 try:
                     frame = frame.convert("RGBA")
                 except BaseException:
